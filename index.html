@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITOUT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f0f2f5;
+        }
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #abcdef, #fedcba);
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Menu Bar */
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 5px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .navbar li {
+            position: relative;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #00acee;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 100px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 16px;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .content {
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .content-section {
+            display: none;
+            text-align: justify;
+        }
+
+        .content-section.active {
+            padding: 20px;
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .social-buttons a {
+            color: white;
+            margin: 0 5px;
+            font-size: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-buttons a:hover {
+            color: #00acee;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 720px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner -->
+    <div class="banner">
+        Incomplete Theory Of Universal Truth<br><br>— Amit Vyas —<br>[Dedicated To The Mother Nature]
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true" aria-expanded="false">HOME</a>
+                <div class="dropdown-content">
+                    <a href="http://14131211.mysite.com" data-section="#" target="_blank" rel="noopener noreferrer">Old</a>
+                    <a href="https://itout.life" data-section="#" target="_blank" rel="noopener noreferrer">Gold</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true" aria-expanded="false">ITOUT</a>
+                <div class="dropdown-content">
+                    <a href="page1.html" data-section="page1">INTRODUCTION</a>
+                    <a href="page2.html" data-section="page2">WORDS AFFECTS</a>
+                    <a href="#" data-section="page3">MISTAKES AFFECTS</a>
+                    <a href="#" data-section="page4">WANDER</a>
+                    <a href="#" data-section="page5">IDLE TRIAL APATHY</a>
+                    <a href="#" data-section="page6">MUSIC IS GOD</a>
+                    <a href="#" data-section="page7">SCIENCE IS GOD</a>
+                    <a href="#" data-section="page8">PREVIOUS NEXT BIRTH</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true" aria-expanded="false">WORK</a>
+                <div class="dropdown-content">
+                    <a href="#" data-section="wig">WorkIsGod</a>
+                    <a href="#" data-section="quotes">Quotes</a>
+                    <a href="#" data-section="bolj">Online Jobs</a>
+                    <a href="#" data-section="service">Service</a>
+                    <a href="#" data-section="goods">Goods</a>
+                    <a href="#" data-section="download">Download</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" aria-haspopup="true" aria-expanded="false">PERSONAL</a>
+                <div class="dropdown-content">
+                    <a href="#" data-section="about">About</a>
+                    <a href="#" data-section="bio">Bio</a>
+                    <a href="#" data-section="hobbies">Hobbies</a>
+                    <a href="#" data-section="showcase">Showcase</a>
+                    <a href="#" data-section="contact">Contact</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content">
+            <div id="quotes" class="content-section active">
+                <h2>QUOTES</h2><br><hr><br>
+                <p>Educational Mathematical Science gives the distribution of Man Made Things only. While, the Entire Mathematical Science tells us the hidden meaning of GOD, that gives the Exact Distribution of all Natural Living and Non-Living Things.</p><br><hr><br>
+                <p>Thinking is the Foremost Practice that unfolds all secrets of any problem.</p><br><hr><br>
+                <p>General Knowledge can be communicate but not Specific Knowledge. It is a programming of the GOD.</p><br><hr><br>
+                <p>Something is better than nothing if it is Positive, otherwise, if it is negative, nothing is better, since it is neutral beacuse neutral is zero which may an origin(0) for a number line and we also know the importance of an origin of two(x,y), three(x,y,z) and four dimentional space[{length(x), width(y), {height(z), and/or depth(-z)} and time(t)}].</p><br><hr><br>
+                <p>You can never plan the future by the foundation of the past but you can use the past experiences to build a better future plan.</p><br><hr><br>
+                <p>If career is the target then meditation centralize the target but muse about the career mislead a student from the target so what can you do, don't just think about it like other, but do it now, that is:<br><br><strong>"Do It As Like As The Mother Nature Does!"</strong></p><br><hr><br>
+            </div>
+            <div id="bolj" class="content-section">
+                <h2>ONLINE JOBS</h2><br><hr><br>
+                <p>I had registered with BharatOnlineJobs who have tied up with eJobsJunction.com, a platform to provide you with better resources on work at home opportunities. This is my small effort to make my website.</p><br>
+                <p>The advent of the internet has created innumerable opportunities for interaction among cultures. With its massive popularity, the internet has been used as a venue for quite a number of interests, as well as business ventures. These businesses and other online sources of income paved the way for various online jobs to surface in the market. With scores of jobseekers wishing to enter the work force, online jobs not only increase person-to-job ratio. It also provides an opportunity for people to expand their horizon.<br><br><strong>Thank You BharatOnlineJobs!</strong></p><br>
+            </div>
+            <div id="about" class="content-section">
+                <h2>About</h2><br><hr><br>
+                <p>Welcome to my world of exploration and innovation! I am Amit Vyas, a passionate thinker and enthusiast of mathematical sciences and statistics. Through my website, "Incomplete Theory of Universal Truth," I delve into the fascinating differences between natural and man-made distributions, inspiring future mathematicians and statisticians. In critical times like the COVID-19 lockdown, online job work became a lifeline, enabling flexibility, cultural interactions, and expanded opportunities—proving that the internet not only boosts person-to-job ratios but also empowers us to thrive amid challenges. My philosophy views life as an infinite diameter of a circle: boundless, ever-expanding, and centered on the origin (zero), where positive actions outweigh neutrality, and past experiences fuel better futures. Join me in unfolding the secrets of the universe through thought, meditation, and decisive action.</p>
+            </div>
+            <div id="wig" class="content-section">
+                <h2>Work Is God</h2><br>
+                <p>In the spirit of my website, "Incomplete Theory of Universal Truth," I embrace the philosophy that "Work Is God"—a belief that purposeful work is a divine force driving personal growth and societal progress. During critical times like the COVID-19 lockdown, online work emerged as a savior, offering stability and opportunity when the world paused. It connected cultures, empowered individuals, and proved that dedication to work transcends physical boundaries. For me, work is not just a task but a sacred act of creation, akin to the infinite diameter of a circle—limitless in its potential to expand knowledge, solve problems, and inspire. Whether through data entry, customer support, or crafting statistical models, every effort reflects my commitment to turning challenges into opportunities and errors into insights.</p><br>
+                <h3>Why Work Matters</h3><br>
+                <p>Work is the pulse of life, a way to channel energy into meaningful outcomes. On my website, I explore how online jobs during the pandemic highlighted the importance of adaptability and resilience. From my roles as a Data Entry Operator and Content Specialist, I learned that work fosters discipline, builds global connections, and fuels innovation. It’s a universal language that bridges gaps, much like the mathematical distributions I study, where every data point contributes to a greater truth.</p><br>
+                <h3>Work Philosophy</h3><br>
+                <p>I see myself as the infinite diameter of a circle, centered at the origin (zero), where work is the radius that expands my potential. This philosophy drives my passion for mathematics, programming, and writing—each task a step toward uncovering universal truths. Online work, especially in tough times, embodies this idea by offering flexibility and access to diverse opportunities, proving that dedication to work is a form of worship that uplifts both self and society.</p>
+            </div>
+            <div id="bio" class="content-section">
+                <h2>Bio</h2><br>
+                <p>Born and raised in Indore, Madhya Pradesh, I am an independent, dynamic, and energetic individual with a positive outlook on life. As a complete extrovert, I easily connect with people and build lasting friendships. Professionally, I've excelled in online roles such as Data Entry Operator, English Typist, Customer Care Executive, and Content Entry Specialist, honing skills that proved invaluable during the pandemic lockdowns. These experiences highlighted the importance of remote work in maintaining livelihoods when physical mobility was restricted, allowing seamless global collaborations and personal growth. Philosophically, I see myself as the infinite diameter of a circle—limitless in potential, embracing uncertainty like statistical models, and believing that specific knowledge is divine programming while general knowledge fosters communication. From reviewing scientific accuracies to sharing inspirational content, my journey is about turning errors into insights and blunders into breakthroughs.</p>
+            </div>
+            <div id="hobbies" class="content-section">
+                <h2>Hobbies</h2><br>
+                <ul>
+                    <li><strong>Music:</strong> My website, 14131211.mysite.com, is a reflection of my personal journey and interests. Among them, music holds a special place in my heart. I have a deep passion for playing the mouth organ, a hobby that brings me joy and serves as a therapeutic outlet. Suggested as a way to support my health due to pleural effusion in my lung! Playing the mouth organ has become more than just a pastime—it’s a way to express myself and find balance. It's a way to live our lives in the moment. It is my sanctuary, uplifting my spirit and enriching my life.</li>
+                    <li><strong>Mathematics and Statistics:</strong> Exploring distributions, uncertainties, and real-world applications to inspire innovative thinking.</li>
+                    <li><strong>Programming:</strong> Creating tools like C programs for practical problems, such as finding the day of a given date.</li>
+                    <li><strong>Writing and Poetry:</strong> Crafting stanzas and reviews that blend humor, love, and philosophy, shared on platforms like Instagram and Facebook.</li>
+                    <li><strong>Meditation and Reflection:</strong> Focusing the mind for career and personal growth, emphasizing action over mere planning.</li>
+                    <li><strong>Social Networking:</strong> Connecting with diverse cultures online, expanding horizons through meaningful interactions.</li>
+                </ul>
+            </div>
+            <div id="showcase" class="content-section">
+                <h2>Showcase</h2><br>
+                <h3>Showcase/Gallery</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <div style="width: 300px; border: 1px solid #ccc; padding: 10px;">
+                        <h4>Online Job Portfolio</h4>
+                        <p>Highlights of my remote work experiences, including data entry and customer support during lockdowns, showcasing adaptability and efficiency in digital environments.</p>
+                    </div>
+                    <div style="width: 300px; border: 1px solid #ccc; padding: 10px;">
+                        <h4>Philosophical Writings</h4>
+                        <p>Excerpts from my theories on infinite potential, like viewing the self as an boundless circle diameter, blending math with life lessons for inspiration.</p>
+                    </div>
+                    <div style="width: 300px; border: 1px solid #ccc; padding: 10px;">
+                        <h4>Programming Projects</h4>
+                        <p>Downloadable C programs and statistical models demonstrating practical applications, from date calculations to error analyses.</p>
+                    </div>
+                    <div style="width: 300px; border: 1px solid #ccc; padding: 10px;">
+                        <h4>Poetic Expressions</h4>
+                        <p>Funny and heartfelt stanzas on love and life, shared via social media, reflecting my extroverted and creative side.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="contact" class="content-section">
+                <h2>Connect with Me in the Digital Realm!</h2><br>
+                <p>Embracing the power of the digital world, I'm fully immersed in the virtual space, working from the comfort of my home and thriving in the online landscape. In these times, with the ongoing impact of the COVID-19 pandemic, I prefer the safety and convenience of digital connections over physical ones. Whether it's collaborating on exciting projects, shopping for essentials, or staying connected with the world, the digital realm offers unparalleled flexibility and endless possibilities.</p>
+                <p>Reach out to me via email at <strong>contact@14131211.mysite.com</strong> or connect through my social channels linked on the site. Let's create, share, and innovate together in this vibrant, boundary-free digital universe!</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-buttons">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://x.com/akkcvyas" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/akkcvyas" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@amitvyas1463" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/ais/842375711579780?s=5" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.quora.com/profile/Amit-Vyas-310" target="_blank" rel="noopener noreferrer" aria-label="Quora"><i class="fab fa-quora"></i></a>
+            <a href="https://pin.it/3DwvexV42" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <br>
+        <p>&copy; 2025 ITOUT. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.dropdown-content a');
+        const sections = document.querySelectorAll('.content-section');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if (button.hasAttribute('href') && button.getAttribute('href') !== '#') {
+                    return;
+                } else {
+                    e.preventDefault();
+                    const sectionId = button.getAttribute('data-section');
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                }
+            });
+        });
+
+        // Show first section by default
+        document.getElementById('quotes').classList.add('active');
+    </script>
+</body>
+</html>

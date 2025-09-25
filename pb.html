@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Loading Progress with Delay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #progress-container {
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #progress-bar {
+            width: 300px;
+            height: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #progress {
+            width: 0;
+            height: 100%;
+            background: white;
+            transition: width 0.3s ease;
+        }
+        #progress-text {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        #content {
+            display: none;
+            text-align: center;
+        }
+        img.media-asset, video, embed, object {
+            max-width: 300px;
+            margin: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <div id="progress-text">Loading: 0%</div>
+    </div>
+    <div id="content">
+        <h1>Media Content</h1>
+        
+         <video class="media-asset" controls>
+            <source src="9.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+  <img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+  <img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+
+  <img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+        <img class="media-asset" src="8.jpg" alt="Sample Image 8">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+        <img class="media-asset" src="1.png" alt="Sample Image 1">
+        <img class="media-asset" src="2.png" alt="Sample Image 2">
+        <img class="media-asset" src="3.jpg" alt="Sample Image 3">
+        <img class="media-asset" src="4.jpeg" alt="Sample Image 4">
+        <img class="media-asset" src="5.jpeg" alt="Sample Image 5">
+        <img class="media-asset" src="6.jpeg" alt="Sample Image 6">
+        <img class="media-asset" src="7.jpeg" alt="Sample Image 7">
+<img class="media-asset" src="local-image.jpg" alt="Local Image">
+<img class="media-asset" src="https://picsum.photos/200/300" alt="Image 1">
+        <img class="media-asset" src="https://picsum.photos/200/301" alt="Image 2">
+    </div>
+    <script>
+
+        const mediaElements = [
+            ...document.getElementsByClassName('media-asset')
+          
+        ];
+        const totalMedia = mediaElements.length;
+        let loadedMedia = 0;
+        const progressBar = document.getElementById('progress');
+        const progressText = document.getElementById('progress-text');
+        const progressContainer = document.getElementById('progress-container');
+        const content = document.getElementById('content');
+
+        // Define delays for each media type (in milliseconds)
+        const delays = {
+            'IMG': 1000,
+            'VIDEO': 1000
+        };
+
+        function updateProgress() {
+            loadedMedia++;
+            const percentage = (loadedMedia / totalMedia) * 100;
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = `Loading: ${Math.round(percentage)}%`;
+            if (loadedMedia === totalMedia) {
+                progressContainer.style.display = 'none';
+                content.style.display = 'block';
+            }
+        }
+
+        if (totalMedia === 0) {
+            progressContainer.style.display = 'none';
+            content.style.display = 'block';
+        } else {
+            mediaElements.forEach(element => {
+                const tagName = element.tagName;
+                const delay = delays[tagName] || 1000; // Default delay of 1 second
+
+                if (element.tagName === 'IMG') {
+                    if (element.complete) {
+                        setTimeout(updateProgress, delay);
+                    } else {
+                        element.onload = () => setTimeout(updateProgress, delay);
+                        element.onerror = () => setTimeout(updateProgress, delay);
+                    }
+                } else if (element.tagName === 'VIDEO') {
+                    if (element.complete) { // HAVE_CURRENT_DATA or higher
+                        setTimeout(updateProgress, delay);
+                    } else {
+                        element.onload = () => setTimeout(updateProgress, delay);
+                        element.onerror = () => setTimeout(updateProgress, delay);
+                    }
+                } 
+            });
+        }
+    </script>
+</body>
+</html>

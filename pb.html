@@ -66,7 +66,7 @@
     <div id="content">
         <h1>Media Content</h1>
                 
-        <video controls>
+        <video class="media-asset" controls>
             <source src="9.mp4" type="video/mp4">
         </video>
         <img class="media-asset" src="1.png" alt="Sample Image 1">
@@ -201,8 +201,8 @@
 
         // Define delays for each media type (in milliseconds)
         const delays = {
-            'IMG': 1000,
-            'VIDEO': 1000
+            'IMG': 1,
+            'VIDEO': 1
         };
 
         function updateProgress() {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Databases</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="authContainer">
+        <h1>Enter Password</h1>
+        <input type="password" id="passwordInput" placeholder="Password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <div id="mainContainer" style="display: none;">
+        <h1>Manage Databases</h1>
+        <!-- Dropdown to select database type -->
+        <select id="dbSelect" onchange="updateFormAndTable()">
+            <option value="book">Book</option>
+            <option value="movie">Movie</option>
+            <option value="software">Software</option>
+            <option value="grocery">Grocery</option>
+        </select>
+
+        <!-- Form container (dynamically updated) -->
+        <form id="dataForm" style="display: none;">
+            <input type="hidden" id="dataId" value="">
+            <!-- Form fields will be dynamically inserted here -->
+        </form>
+
+        <!-- Table to display data -->
+        <table id="dataTable">
+            <thead id="tableHead"></thead>
+            <tbody id="dataBody"></tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

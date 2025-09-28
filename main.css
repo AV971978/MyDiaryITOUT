@@ -139,5 +139,17 @@ body {
 
     .content {
         width: 100%;
-    }
+    } 
+
+.knowledge-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
+
+.knowledge-table th, .knowledge-table td {
+    word-break: break-word;
+    padding: 8px;
+    text-align: left;
+}
+

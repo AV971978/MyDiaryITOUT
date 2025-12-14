@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Library Management System</title>
+  <style>
+        .header-bar {
+            display: flex;              /* Enable flexbox */
+            justify-content: space-between; /* Push children to left & right */
+            align-items: center;        /* Vertically center them on the line */
+            padding: 10px;              /* Optional: some spacing */
+            background-color: #f0f0f0;  /* Optional: background for visibility */
+            width: 100%;                /* Full width */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== LOGIN PANEL ==================== -->
+
+
+<div align="center">
+    <div id="login-panel">
+        <h2>Public Library</h2>
+        <input type="text" id="username" placeholder="Username"><br><br>
+        <input type="password" id="password" placeholder="Password"><br><br>
+        <button id="auth-button" onclick="login()">Login</button>
+        <p id="status-message" style="color:red; margin-top:10px;"></p>
+        
+        <hr style="margin:30px 0;">
+        <small>
+            • User: username <strong>user</strong> / password <strong>guest</strong>
+        </small>
+    </div></div>
+
+    <!-- ==================== LIBRARY PANEL ==================== -->
+
+    <div id="library-panel" style="display:none;">
+            <div class="header-bar" style="margin-bottom:20px;">
+  <div>    Welcome <strong><span id="current-user-role"></span></strong>!</div>
+<div> 
+ <button onclick="logout()" style="margin-left:20px;">Logout</button></div>
+
+          </div>
+
+            <div id="status-message-library"></div>
+
+            <!-- Add Book Section (Admin Only) -->
+            <div align="center" id="add-book-section">
+                <h3>Add New Book <br> (Admin Only)</h3>
+                <input type="text" id="add-title" placeholder="Title"><br><br>
+                <input type="text" id="add-author" placeholder="Author"><br><br>
+                <input type="text" id="add-publisher" placeholder="Publisher"><br><br>
+                <input type="number" id="add-year" placeholder="Year" min="1000"><br><br>
+                <button onclick="addBook()">Add Book</button>
+            </div>
+
+            <h2>Available Books</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th onclick="sortBooks('id')">ID</th>
+                        <th onclick="sortBooks('title')">Title</th>
+                        <th onclick="sortBooks('author')">Author</th>
+                        <th onclick="sortBooks('publisher')">Publisher</th>
+                        <th onclick="sortBooks('year')">Year</th>
+                        <th id="action-header">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="book-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'libraryBooks_v2';
+
+        const USERS = {
+            'admin': { password: 'admin', role: 'admin' },
+            'user':  { password: 'guest', role: 'user' }
+        };
+
+        let currentUser = null;
+
+        let books = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
+            { id: 1, title: "The Hitchhiker's Guide to the Galaxy", author: 'Douglas Adams', publisher: 'Pan Books', year: 1979, borrowedBy: null },
+            { id: 2, title: "Dune", author: 'Frank Herbert', publisher: 'Chilton Books', year: 1965, borrowedBy: 'user' },
+            { id: 3, title: "1984", author: 'George Orwell', publisher: 'Secker & Warburg', year: 1949, borrowedBy: null },
+            { id: 4, title: "To Kill a Mockingbird", author: 'Harper Lee', publisher: 'J.B. Lippincott & Co.', year: 1960, borrowedBy: null }
+        ];
+
+        let nextId = books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1;
+
+        const elements = {
+            loginPanel: document.getElementById('login-panel'),
+            libraryPanel: document.getElementById('library-panel'),
+            usernameInput: document.getElementById('username'),
+            passwordInput: document.getElementById('password'),
+            statusMessage: document.getElementById('status-message'),
+            statusMessageLibrary: document.getElementById('status-message-library'),
+            currentUserRoleSpan: document.getElementById('current-user-role'),
+            currentUsernameSpan: document.getElementById('current-username'),
+            addBookSection: document.getElementById('add-book-section'),
+            bookTableBody: document.getElementById('book-table-body'),
+            actionHeader: document.getElementById('action-header')
+        };
+
+        function saveBooks() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
+        }
+
+        function showMessage(text, isError = false) {
+            const msgEl = currentUser ? elements.statusMessageLibrary : elements.statusMessage;
+            msgEl.textContent = text;
+            msgEl.style.color = isError ? 'red' : 'green';
+        }
+
+        function renderBooks() {
+            elements.bookTableBody.innerHTML = '';
+            books.forEach(book => {
+                let actionCell = '';
+                if (!currentUser) {
+                    actionCell = book.borrowedBy ? `Borrowed by ${book.borrowedBy}` : 'Available';
+                } else if (currentUser.role === 'admin') {
+                    actionCell = `<button onclick="deleteBook(${book.id})">Delete</button>`;
+                } else {
+                    if (book.borrowedBy === currentUser.username) {
+                        actionCell = `<button onclick="returnBook(${book.id})">Return</button>`;
+                    } else if (book.borrowedBy) {
+                        actionCell = `Borrowed by ${book.borrowedBy}`;
+                    } else {
+                        actionCell = `<button onclick="borrowBook(${book.id})">Borrow</button>`;
+                    }
+                }
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${book.id}</td>
+                    <td><strong>${book.title}</strong></td>
+                    <td>${book.author}</td>
+                    <td>${book.publisher}</td>
+                    <td>${book.year}</td>
+                    <td>${actionCell}</td>
+                `;
+                elements.bookTableBody.appendChild(row);
+            });
+        }
+
+        function updateActionHeader() {
+            if (!currentUser) elements.actionHeader.textContent = 'Status';
+            else if (currentUser.role === 'admin') elements.actionHeader.textContent = 'Admin Actions';
+            else elements.actionHeader.textContent = 'Your Actions';
+        }
+
+        function login() {
+            const username = elements.usernameInput.value.trim();
+            const password = elements.passwordInput.value;
+
+            if (USERS[username] && USERS[username].password === password) {
+                currentUser = { username: username, role: USERS[username].role };
+
+                // Switch panels
+                elements.loginPanel.style.display = 'none';
+                elements.libraryPanel.style.display = 'block';
+
+                // Update welcome message
+                elements.currentUserRoleSpan.textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+                elements.currentUsernameSpan.textContent = username;
+
+                // Show/hide admin section
+                elements.addBookSection.style.display = currentUser.role === 'admin' ? 'block' : 'none';
+
+                updateActionHeader();
+                renderBooks();
+                showMessage(`Welcome, ${username}!`);
+            } else {
+                showMessage('Invalid username or password', true);
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+
+            // Clear inputs
+            elements.usernameInput.value = '';
+            elements.passwordInput.value = '';
+
+            // Switch panels back
+            elements.libraryPanel.style.display = 'none';
+            elements.loginPanel.style.display = 'block';
+
+            // Clear messages
+            elements.statusMessage.textContent = '';
+            elements.statusMessageLibrary.textContent = '';
+
+            renderBooks(); // Will show guest view
+        }
+
+        function addBook() {
+            if (currentUser.role !== 'admin') return;
+
+            const title = document.getElementById('add-title').value.trim();
+            const author = document.getElementById('add-author').value.trim();
+            const publisher = document.getElementById('add-publisher').value.trim();
+            const year = parseInt(document.getElementById('add-year').value);
+
+            if (!title || !author || !publisher || isNaN(year) || year < 1000 || year > new Date().getFullYear() + 1) {
+                alert('Please fill all fields correctly (valid year required).');
+                return;
+            }
+
+            books.push({ id: nextId++, title, author, publisher, year, borrowedBy: null });
+            saveBooks();
+            renderBooks();
+
+            document.getElementById('add-title').value = '';
+            document.getElementById('add-author').value = '';
+            document.getElementById('add-publisher').value = '';
+            document.getElementById('add-year').value = '';
+
+            showMessage(`"${title}" added successfully!`);
+        }
+
+        function deleteBook(id) {
+            if (currentUser.role !== 'admin') return;
+            if (!confirm('Delete this book permanently?')) return;
+
+            books = books.filter(b => b.id !== id);
+            saveBooks();
+            renderBooks();
+            showMessage('Book deleted');
+        }
+
+        function borrowBook(id) {
+            const book = books.find(b => b.id === id);
+            if (book && !book.borrowedBy) {
+                book.borrowedBy = currentUser.username;
+                saveBooks();
+                renderBooks();
+                showMessage(`You borrowed "${book.title}"`);
+            }
+        }
+
+        function returnBook(id) {
+            const book = books.find(b => b.id === id);
+            if (book && book.borrowedBy === currentUser.username) {
+                book.borrowedBy = null;
+                saveBooks();
+                renderBooks();
+                showMessage(`You returned "${book.title}"`);
+            }
+        }
+
+        let lastSortKey = '';
+        let sortDirection = 1;
+        function sortBooks(key) {
+            if (lastSortKey === key) sortDirection *= -1;
+            else { sortDirection = 1; lastSortKey = key; }
+
+            books.sort((a, b) => {
+                let A = a[key], B = b[key];
+                if (typeof A === 'string') { A = A.toLowerCase(); B = B.toLowerCase(); }
+                if (A < B) return -1 * sortDirection;
+                if (A > B) return 1 * sortDirection;
+                return 0;
+            });
+
+            renderBooks();
+        }
+
+        // Initial state: show login panel
+        renderBooks(); // Shows public view of books if needed, but library is hidden
+    </script>
+</body>
+  </html>
